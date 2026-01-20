@@ -128,7 +128,7 @@ private let backendURL = "https://bagstats.xyz"
 #endif
 ```
 
-> **Note:** A backend server is required to proxy requests to the Bags.fm API and manage rate limiting.
+> **Note:** A backend server is required. See [bagstats-backend](https://github.com/Pavelevich/bagstats-backend) for setup instructions.
 
 ## API Endpoints
 
