@@ -1,89 +1,124 @@
-# BagStats
+<p align="center">
+  <img src="icon.png" width="120" height="120" alt="BagStats Logo">
+</p>
 
-**Track your Bags.fm earnings on iOS**
+<h1 align="center">BagStats</h1>
 
-BagStats is a native iOS app that lets you monitor your Solana wallet earnings from [Bags.fm](https://bags.fm) - the leading platform for token creator fees on Solana.
+<p align="center">
+  <strong>Track your Bags.fm earnings on iOS</strong>
+</p>
+
+<p align="center">
+  <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-5.9-orange.svg" alt="Swift 5.9"></a>
+  <a href="https://developer.apple.com/ios/"><img src="https://img.shields.io/badge/iOS-17.0+-blue.svg" alt="iOS 17.0+"></a>
+  <a href="https://developer.apple.com/xcode/swiftui/"><img src="https://img.shields.io/badge/SwiftUI-5.0-purple.svg" alt="SwiftUI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-iOS-lightgrey.svg" alt="Platform">
+  <img src="https://img.shields.io/badge/Architecture-MVVM-yellow.svg" alt="MVVM">
+</p>
+
+---
+
+## Overview
+
+**BagStats** is a native iOS application for monitoring your [Bags.fm](https://bags.fm) earnings on the Solana blockchain. Bags.fm is the leading platform for token creator fees, and BagStats helps you track your unclaimed rewards across multiple wallets in a beautiful, intuitive interface.
 
 ## Features
 
-- **Multi-Wallet Support** - Track multiple Solana wallets in one place
-- **Real-Time Stats** - View unclaimed fees, claimed amounts, and total earnings
-- **Push Notifications** - Get alerts when new bags arrive (coming soon)
-- **Beautiful UI** - Native SwiftUI with smooth animations and dark theme
-- **Pull to Refresh** - Always see your latest earnings
-- **Token Breakdown** - See earnings per token with logos
+| Feature | Description |
+|---------|-------------|
+| **Multi-Wallet** | Track unlimited Solana wallets simultaneously |
+| **Real-Time Stats** | View unclaimed, claimed, and total earnings |
+| **Token Breakdown** | See earnings per token with logos and details |
+| **Push Notifications** | Get alerts when new bags arrive *(coming soon)* |
+| **Pull to Refresh** | Always see your latest earnings instantly |
+| **Custom Avatars** | Personalize wallets with names and photos |
+| **Dark Theme** | Beautiful native dark UI with smooth animations |
 
 ## Screenshots
 
-| Wallets | Summary | Wallet Detail |
-|---------|---------|---------------|
-| Track multiple wallets | See total earnings at a glance | Detailed token breakdown |
+<p align="center">
+  <i>Coming soon</i>
+</p>
 
 ## Requirements
 
-- iOS 17.0+
-- Xcode 15.0+
-- Swift 5.9+
+| Requirement | Version |
+|-------------|---------|
+| iOS | 17.0+ |
+| Xcode | 15.0+ |
+| Swift | 5.9+ |
 
 ## Installation
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/bagstats-ios.git
-cd bagstats-ios
-```
+# Clone the repository
+git clone https://github.com/Pavelevich/bagstats-ios.git
 
-2. Open the project in Xcode:
-```bash
+# Navigate to project directory
+cd bagstats-ios
+
+# Open in Xcode
 open BagStats.xcodeproj
 ```
 
-3. Build and run on your device or simulator
+Build and run on your device or simulator using `Cmd + R`.
 
-## Architecture
+## Project Structure
 
 ```
 BagStats/
 ├── App/
-│   ├── BagStatsApp.swift      # App entry point
-│   └── Theme.swift            # Colors, fonts, styles
+│   ├── BagStatsApp.swift       # App entry point & delegate
+│   └── Theme.swift             # Design system (colors, fonts, styles)
+│
 ├── Models/
-│   ├── Wallet.swift           # Wallet data model
-│   └── BagPosition.swift      # Position/stats models
+│   ├── Wallet.swift            # Wallet data model
+│   └── BagPosition.swift       # Position & stats models
+│
 ├── Views/
-│   ├── ContentView.swift      # Main tab view + Summary
-│   ├── WalletListView.swift   # Wallet list with swipe actions
-│   ├── WalletDetailView.swift # Individual wallet stats
-│   ├── AddWalletView.swift    # Add new wallet
-│   └── SettingsView.swift     # App settings
+│   ├── ContentView.swift       # Tab view + Summary screen
+│   ├── WalletListView.swift    # Wallet list with swipe actions
+│   ├── WalletDetailView.swift  # Individual wallet breakdown
+│   ├── AddWalletView.swift     # Add new wallet flow
+│   └── SettingsView.swift      # App settings & preferences
+│
 ├── ViewModels/
-│   └── WalletStore.swift      # State management
+│   └── WalletStore.swift       # State management & persistence
+│
 ├── Services/
-│   ├── BagsAPIService.swift   # API client
-│   └── NotificationService.swift # Push notifications
+│   ├── BagsAPIService.swift    # API client (async/await)
+│   └── NotificationService.swift # Push notification handling
+│
 └── Resources/
-    └── Assets.xcassets        # Images and colors
+    └── Assets.xcassets         # Images, icons, colors
 ```
+
+## Architecture
+
+BagStats follows the **MVVM (Model-View-ViewModel)** pattern with modern Swift concurrency:
+
+- **Models** — Pure data structures with Codable conformance
+- **Views** — Declarative SwiftUI views with minimal logic
+- **ViewModels** — ObservableObject classes handling business logic
+- **Services** — Actor-based API clients with async/await
 
 ## Tech Stack
 
-- **SwiftUI** - Declarative UI framework
-- **Swift Concurrency** - async/await for networking
-- **Combine** - Reactive state management
-- **UserNotifications** - Push notification handling
-
-## Backend
-
-This app requires a backend server to proxy requests to the Bags.fm API. The backend handles:
-- API key management
-- Rate limiting
-- Push notification delivery (APNs)
-
-Backend repository: [bagstats-backend](https://github.com/yourusername/bagstats-backend) (coming soon)
+| Technology | Purpose |
+|------------|---------|
+| SwiftUI | Declarative UI framework |
+| Swift Concurrency | async/await networking |
+| Combine | Reactive state management |
+| UserNotifications | Push notification handling |
+| PhotosUI | Custom wallet avatars |
 
 ## Configuration
 
-The app connects to different backend URLs based on build configuration:
+The app connects to a backend proxy server that handles API authentication:
 
 ```swift
 #if DEBUG
@@ -93,31 +128,50 @@ private let backendURL = "https://bagstats.xyz"
 #endif
 ```
 
-Update `BagsAPIService.swift` and `NotificationService.swift` with your backend URL for production.
+> **Note:** A backend server is required to proxy requests to the Bags.fm API and manage rate limiting.
+
+## API Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/wallet/:address/stats` | Fetch wallet earnings & positions |
+| `POST /api/subscriptions` | Subscribe to push notifications |
+| `DELETE /api/subscriptions/:wallet` | Unsubscribe from notifications |
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please follow these steps:
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+## Roadmap
+
+- [ ] Push notifications for new bags
+- [ ] Widget support for home screen
+- [ ] Apple Watch companion app
+- [ ] Historical earnings charts
+- [ ] Multiple currency display (USD/EUR/SOL)
+
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- [Bags.fm](https://bags.fm) - Token creator fee platform
-- [Solana](https://solana.com) - Blockchain infrastructure
-
-## Contact
-
-Developed by **Tetsuo Corp.**
+- [Bags.fm](https://bags.fm) — Token creator fee platform
+- [Solana](https://solana.com) — Blockchain infrastructure
+- [Jupiter](https://jup.ag) — Token metadata API
 
 ---
 
-*BagStats is not affiliated with Bags.fm. Use at your own risk.*
+<p align="center">
+  Made with Swift by <a href="https://github.com/Pavelevich">@Pavelevich</a>
+</p>
+
+<p align="center">
+  <sub>BagStats is not affiliated with Bags.fm. Use at your own risk.</sub>
+</p>
